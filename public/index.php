@@ -1,5 +1,5 @@
 <?php 
-require_once("connect.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -18,7 +18,7 @@ require_once("connect.php");
       <div class="col-md-6">
       <h1>Mijn abonnement</h1>
       <div class="card p-4" style="background-color: #b3e5fc;">
-        <form class="d-flex flex-column" style="position: relative;">
+        <form class="d-flex flex-column" style="position: relative;" action="abonnementopzeggen.php">
           <div class="mb-3">
             <label for="name" class="form-label">Naam</label>
             <input type="text" class="form-control" id="name" value="Naam" disabled />
@@ -29,13 +29,12 @@ require_once("connect.php");
           </div>
           <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <input type="text" class="form-control" id="status" value="Status" disabled />
+            <input type="text" class="form-control" id="status" value="Actief" disabled />
           </div>
           <button type="submit" class="btn btn-danger" style="align-self: flex-end;">Annuleren van abonnement</button>
         </form>
         </div>
       </div>
-
 
         <div class="col-md-6">
           <h1>Cursussen</h1>
