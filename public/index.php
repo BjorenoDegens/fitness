@@ -38,7 +38,7 @@
 
         <div class="col-md-6">
           <h1>Cursussen</h1>
-          <table class="table table-bordered">
+          <table class="table table-bordered" action="cursusaangemeld.php">
             <thead style="background-color: #b3e5fc;">
               <tr>
                 <th>Cursus naam</th>
