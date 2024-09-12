@@ -20,4 +20,3 @@ catch (PDOException $e)
 {
     die($e->getMessage());
 }
-  echo"Database is connected";
