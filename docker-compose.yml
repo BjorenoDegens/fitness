@@ -1,0 +1,57 @@
+version: "3.8"
+name: project
+services:
+  # NGINX
+  webserver:
+    image: nginx:latest
+    container_name: NGINX
+    ports:
+      - ${WEBSERVERPORT}
+    volumes:
+      - .${INDEXFOLDER}:/var/www/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php-fpm
+      - mysql-db
+  # PHP
+  php-fpm:
+    container_name: PHP
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - .${INDEXFOLDER}:/var/www/html
+    environment:
+      - HOST=${HOSTNAME}
+      - DATABASENAME=${DATABASENAME}
+      - USERNAME=${SQLUSER}
+      - PASSWORD=${SQLPASSWORD}
+    depends_on:
+      - mysql-db
+  # SQL
+  mysql-db:
+    image: mysql:8.0
+    container_name: MYSQL
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SQLPASSWORD}
+      MYSQL_DATABASE: ${DATABASENAME}
+      MYSQL_USER: ${SQLUSER}
+      MYSQL_PASSWORD: ${SQLPASSWORD}
+    ports:
+      - ${MYSQLPORT}
+    volumes:
+      - db_data:/var/lib/mysql
+  # PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: PHPMyAdmin
+    links:
+      - mysql-db
+    ports:
+      - ${MYADMINPORT}
+    environment:
+      PMA_HOST: ${HOSTNAME}
+      MYSQL_ROOT_PASSWORD: ${SQLPASSWORD}
+    depends_on:
+      - mysql-db
+volumes:
+  db_data:
